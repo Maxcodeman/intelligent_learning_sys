@@ -45,4 +45,33 @@ public class CategoryController {
             return Result.error("添加分类失败");
         }
     }
+
+    @DeleteMapping("/{ids}")
+    public Result deleteByIds(@PathVariable List<Long> ids){
+        int columns=iCategoryService.deleteByIds(ids);
+        log.info("删除的分类数"+columns);
+        return Result.success();
+    }
+
+    @GetMapping("/{id}")
+    public Result selectById(@PathVariable Integer id){
+        Category category=iCategoryService.selectById(id);
+        if(category==null){
+            return Result.error("获取分类失败");
+        }else{
+            log.info("根据id查询到的题目:{}",category);
+            return Result.success(category);
+        }
+    }
+
+    @PutMapping
+    public Result editById(@RequestParam Integer id,@RequestParam(required = false) String name){
+        int column=iCategoryService.editById(id,name);
+        log.info("修改的分类数:"+column);
+        if(column==1){
+            return Result.success();
+        }else{
+            return Result.error("修改失败");
+        }
+    }
 }

@@ -34,4 +34,24 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
         return categoryMapper.insert(category);
     }
+
+    @Override
+    public int deleteByIds(List<Long> ids) {
+        return categoryMapper.deleteBatchIds(ids);
+    }
+
+    @Override
+    public Category selectById(Integer id) {
+        return categoryMapper.selectById(id);
+    }
+
+    @Override
+    public int editById(Integer id, String name) {
+        Category category=categoryMapper.selectById(id);
+        if(name!=null&&!name.equals(category.getCategoryName())){
+            category.setCategoryName(name);
+        }
+        return categoryMapper.updateById(category);
+    }
+
 }

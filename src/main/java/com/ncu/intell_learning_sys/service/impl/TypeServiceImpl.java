@@ -35,4 +35,23 @@ public class TypeServiceImpl extends ServiceImpl<TypeMapper, Type> implements IT
 
         return typeMapper.insert(type);
     }
+
+    @Override
+    public int deleteByIds(List<Long> ids) {
+        return typeMapper.deleteBatchIds(ids);
+    }
+
+    @Override
+    public Type selectById(Integer id) {
+        return typeMapper.selectById(id);
+    }
+
+    @Override
+    public int editById(Integer id, String name) {
+        Type type=typeMapper.selectById(id);
+        if(name!=null&&!name.equals(type.getTypeName())){
+            type.setTypeName(name);
+        }
+        return typeMapper.updateById(type);
+    }
 }

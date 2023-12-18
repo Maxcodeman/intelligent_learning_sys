@@ -18,4 +18,10 @@ public interface ICategoryService extends IService<Category> {
     List<Category> getAllCategories();
 
     Integer addCategory(String categoryName);
+
+    int deleteByIds(List<Long> ids);
+
+    Category selectById(Integer id);
+
+    int editById(Integer id, String name);
 }

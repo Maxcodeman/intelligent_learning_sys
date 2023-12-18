@@ -44,4 +44,32 @@ public class TypeController {
         }
     }
 
+    @DeleteMapping("/{ids}")
+    public Result deleteByIds(@PathVariable List<Long> ids){
+        int columns=iTypeService.deleteByIds(ids);
+        log.info("删除的题型数"+columns);
+        return Result.success();
+    }
+
+    @GetMapping("/{id}")
+    public Result selectById(@PathVariable Integer id){
+        Type type=iTypeService.selectById(id);
+        if(type==null){
+            return Result.error("获取题型失败");
+        }else{
+            log.info("根据id查询到的题型:{}",type);
+            return Result.success(type);
+        }
+    }
+
+    @PutMapping
+    public Result editById(@RequestParam Integer id,@RequestParam(required = false) String name){
+        int column=iTypeService.editById(id,name);
+        log.info("修改的题型数:"+column);
+        if(column==1){
+            return Result.success();
+        }else{
+            return Result.error("修改失败");
+        }
+    }
 }

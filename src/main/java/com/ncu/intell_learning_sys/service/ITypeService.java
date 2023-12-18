@@ -18,4 +18,10 @@ public interface ITypeService extends IService<Type> {
     List<Type> getAllTypes();
 
     int addType(String typeName);
+
+    int deleteByIds(List<Long> ids);
+
+    Type selectById(Integer id);
+
+    int editById(Integer id, String name);
 }
